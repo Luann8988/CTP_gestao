@@ -1,0 +1,25 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.modal-body {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.principal {
+  display: flex;
+  gap: 15px; /* Cria um espaço opcional entre as duas divs */
+}
+
+/* Você define o tamanho que quiser para cada uma */
+.leftbar {
+  width: 24%;
+  background-color: #ffcccc;
+}
+
+.calendario {
+  width: 75%;
+  background-color: #ccffcc;
+}
