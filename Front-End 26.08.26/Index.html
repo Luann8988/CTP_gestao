@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="Styles.css">
+
+    <title>Minha Vez</title>
+</head>
+
+<body>
+
+    <header class="header">
+
+        <a href="Index.html" class="logo" aria-label="Minha Vez">
+            <span>minha</span>
+            <span class="logo-simbolo"></span>
+            <span>vez</span>
+        </a>
+
+        <nav class="menu">
+            <a href="Index.html" class="ativo">Início</a>
+            <a href="cursos.html">Cursos</a>
+            <a href="#">Sobre</a>
+            <a href="#">Contato</a>
+        </nav>
+
+    </header>
+
+
+    <main class="layout">
+
+        <aside class="sidebar">
+
+            <div class="legenda">
+                <h2>Meus cursos</h2>
+            </div>
+
+            <hr>
+
+            <div class="curso-mini azul">
+                <h3>Curso 1</h3>
+                <a href="#">Ver curso</a>
+
+                <div>
+                    <span>Início</span>
+                    <span>Hoje</span>
+                </div>
+            </div>
+
+            <div class="curso-mini rosa">
+                <h3>Curso 2</h3>
+                <a href="#">Ver curso</a>
+
+                <div>
+                    <span>Início</span>
+                    <span>Hoje</span>
+                </div>
+            </div>
+
+            <div class="curso-mini verde">
+                <h3>Curso 3</h3>
+                <a href="#">Ver curso</a>
+
+                <div>
+                    <span>Início</span>
+                    <span>Hoje</span>
+                </div>
+            </div>
+
+            <button class="botao-add" type="button" aria-label="Adicionar curso">
+                +
+            </button>
+
+        </aside>
+
+
+        <section class="conteudo">
+
+            <div class="calendario">
+
+                <div class="calendario-topo">
+                    <button id="mes-anterior" type="button" aria-label="Mês anterior">
+                        ‹
+                    </button>
+
+                    <h1 id="mes-ano"></h1>
+
+                    <button id="proximo-mes" type="button" aria-label="Próximo mês">
+                        ›
+                    </button>
+                </div>
+
+
+                <div class="dias">
+                    <span>Seg</span>
+                    <span>Ter</span>
+                    <span>Qua</span>
+                    <span>Qui</span>
+                    <span>Sex</span>
+                </div>
+
+
+                <div class="dias-grid"></div>
+
+            </div>
+
+
+            <div class="observacao">
+                <strong>Observação:</strong>
+                <p>Clique em um dia para selecionar.</p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="Script.js"></script>
+
+</body>
+</html>

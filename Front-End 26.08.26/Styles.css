@@ -1,0 +1,418 @@
+/* 26/08/26 */ 
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --cinza-header: #b8b8b8;
+    --cinza-sidebar: #d9d9d9;
+    --cinza-card: #d8d8d8;
+
+    --fundo: #faf7f7;
+    --azul: #1976c5;
+    --rosa: #ef3d73;
+    --verde: #16a82a;
+    --vermelho: #ff575b;
+    --amarelo: #ffe27b;
+    --preto: #111;
+}
+body{
+    background:var(--fundo);
+    color:var(--preto);
+    font-family: Arial, Helvetica, sans-serif;
+}
+/*header*/
+.header {
+    height: 70px;
+    width: 100%;
+
+    background: var(--cinza-header);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 30px;
+}
+/*logo*/
+.logo {
+    display: flex;
+    align-items: center;
+
+    text-decoration: none;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 27px;
+    font-weight: 700;
+
+    letter-spacing: -1.5px;
+    line-height: 1;
+
+    color: #0066a6;
+}
+
+.logo-minha,
+.logo-vez {
+    color: #0066a6;
+}
+
+.logo-simbolo {
+    width: 27px;
+    height: 27px;
+
+    margin: 0 2px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: conic-gradient(
+        #00a99d 0deg 75deg,
+        #f4d900 75deg 145deg,
+        #f58220 145deg 210deg,
+        #e91e63 210deg 280deg,
+        #8e44ad 280deg 330deg,
+        #00a99d 330deg 360deg
+    );
+
+    -webkit-mask: radial-gradient(
+        circle,
+        transparent 0 38%,
+        #000 40% 72%,
+        transparent 74%
+    );
+
+    mask: radial-gradient(
+        circle,
+        transparent 0 38%,
+        #000 40% 72%,
+        transparent 74%
+    );
+}
+
+/*menu*/
+.menu {
+    display: flex;
+    align-items: center;
+
+    gap: 22px;
+}
+.menu a {
+    text-decoration: none;
+
+    font-size: 18px;
+    font-weight: 500;
+
+    color: #111;
+
+    transition: color 0.2s ease;
+}
+.menu a:hover {
+    color: var(--azul);
+}
+.menu a.ativo {
+    color: var(--azul);
+    font-weight: 600;
+}
+/*Layout*/
+.layout{
+display: grid;
+grid-template-columns: 255px 1fr;
+min-height: calc(100vh - 75px);
+}
+
+/*sidebar*/
+.sidebar{
+    position: relative;
+    background: var(--cinza-sidebar);
+    padding: 18px 12px;
+    border-radius: 0 0 20px 0;
+}
+.legenda {
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    font-size:20px;
+}
+.sidebar hr{
+    border: none;
+    border-top: 4px solid #777;
+    margin: 25px 8px;
+}
+
+/*cursos html*/
+.curso-mini {
+    position: relative;
+    background: #faf7f7;
+    border-radius: 12px;
+    padding: 10px 12px 10px 16px;
+    margin-bottom: 10px;
+    border-left: 10px solid;
+
+}
+.curso-mini.azul {
+ border-color: var(--azul);
+
+}
+
+.curso-mini.rosa {
+border-color: var(--rosa);
+
+}
+
+.curso-mini.verde {
+border-color: var(--verde);
+
+}
+
+.curso-mini h3 {
+font-size: 21px;
+margin-bottom: 4px;
+
+}
+
+.curso-mini a {
+    color: var(--azul);
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 16px;
+
+}
+
+.curso-mini.rosa a {
+    color: var(--rosa);
+
+}
+
+.curso-mini.verde a {
+    color: var(--verde);
+
+}
+
+.curso-mini div {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    font-size: 15px;
+    font-weight: bold;
+
+}
+
+/* botao*/
+.botao-add {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 55px;
+    height: 55px;
+    border: none;
+    border-radius: 50%;
+    background: var(--vermelho);
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+
+}
+
+/*conteudo*/
+.conteudo {
+    position: relative;
+    padding: 35px;
+
+}
+/*calendario*/
+
+.calendario-topo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 25px;
+
+    margin-bottom: 20px;
+}
+
+.calendario-topo h1 {
+    min-width: 220px;
+
+    text-align: center;
+
+    font-size: 28px;
+    text-transform: capitalize;
+}
+
+.calendario-topo button {
+    width: 45px;
+    height: 45px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: var(--azul);
+    color: white;
+
+    font-size: 30px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.calendario-topo button:hover {
+    transform: scale(1.08);
+
+    background: #125d9c;
+}
+.dias {
+    display: grid;
+
+    grid-template-columns: repeat(7, 1fr);
+
+    gap: 8px;
+
+    margin-bottom: 8px;
+
+    text-align: center;
+
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.dias span {
+    padding: 8px;
+}
+.dias-grid {
+    display: grid;
+
+    grid-template-columns: repeat(7, 1fr);
+
+    gap: 8px;
+}
+
+.dia {
+    width: 100%;
+    height: 80px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 12px;
+
+    background: var(--cinza-card);
+    color: var(--preto);
+
+    font-size: 20px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.dia:hover {
+    transform: scale(1.03);
+
+    background: #c8c8c8;
+}
+
+.dia.selecionado {
+    outline: 4px solid var(--azul);
+
+    transform: scale(1.03);
+}
+
+.dia.hoje {
+    background: var(--azul);
+    color: white;
+
+    font-weight: bold;
+}
+
+.dia.hoje:hover {
+    background: #125d9c;
+}
+
+.dia.vazio {
+    background: transparent;
+
+    cursor: default;
+}
+
+.dia.vazio:hover {
+    transform: none;
+
+    outline: none;
+
+    background: transparent;
+}
+
+/* observação */
+.observacao {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    width: 195px;
+    background: var(--amarelo);
+    padding: 12px;
+    border-radius: 15px;
+    font-size: 17px;
+    line-height: 1.25;
+}
+/* responsivo*/
+@media (max-width: 800px) {
+
+    .layout {
+        grid-template-columns: 1fr;
+
+    }
+    .sidebar {
+
+        min-height: auto;
+
+        padding-bottom: 80px;
+
+    }
+    .botao-add {
+        bottom: 12px;
+
+    }
+    .conteudo {
+        padding: 15px;
+
+    }
+    .calendario {
+
+        margin: 20px auto;
+
+    }
+    .dias {
+
+        font-size: 13px;
+
+        gap: 3px;
+
+    }
+    .dias-grid {
+
+        gap: 6px;
+
+    }
+    .dia {
+
+        height: 55px;
+
+    }
+    .observacao {
+
+        position: static;
+
+        margin: 20px 0 0 auto;
+
+    }
+}
