@@ -3,16 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="Styles.css">
-
     <title>Minha Vez</title>
 </head>
-
 <body>
 
     <header class="header">
-
         <a href="Index.html" class="logo" aria-label="Minha Vez">
             <span>minha</span>
             <span class="logo-simbolo"></span>
@@ -25,14 +21,10 @@
             <a href="#">Sobre</a>
             <a href="#">Contato</a>
         </nav>
-
     </header>
 
-
     <main class="layout">
-
         <aside class="sidebar">
-
             <div class="legenda">
                 <h2>Meus cursos</h2>
             </div>
@@ -42,7 +34,6 @@
             <div class="curso-mini azul">
                 <h3>Curso 1</h3>
                 <a href="#">Ver curso</a>
-
                 <div>
                     <span>Início</span>
                     <span>Hoje</span>
@@ -52,7 +43,6 @@
             <div class="curso-mini rosa">
                 <h3>Curso 2</h3>
                 <a href="#">Ver curso</a>
-
                 <div>
                     <span>Início</span>
                     <span>Hoje</span>
@@ -62,7 +52,6 @@
             <div class="curso-mini verde">
                 <h3>Curso 3</h3>
                 <a href="#">Ver curso</a>
-
                 <div>
                     <span>Início</span>
                     <span>Hoje</span>
@@ -72,14 +61,10 @@
             <button class="botao-add" type="button" aria-label="Adicionar curso">
                 +
             </button>
-
         </aside>
 
-
         <section class="conteudo">
-
             <div class="calendario">
-
                 <div class="calendario-topo">
                     <button id="mes-anterior" type="button" aria-label="Mês anterior">
                         ‹
@@ -92,31 +77,32 @@
                     </button>
                 </div>
 
-
                 <div class="dias">
+                    <span>Dom</span>
                     <span>Seg</span>
                     <span>Ter</span>
                     <span>Qua</span>
                     <span>Qui</span>
                     <span>Sex</span>
+                    <span>Sáb</span>
                 </div>
 
-
                 <div class="dias-grid"></div>
-
             </div>
 
+            <div id="painel-info" class="painel-info" style="display: none;">
+                <h3 id="info-data">Selecione uma data</h3>
+                <p id="info-status"><strong>Disponibilidade:</strong> -</p>
+                <p id="info-feriado"><strong>Feriado:</strong> -</p>
+            </div>
 
             <div class="observacao">
                 <strong>Observação:</strong>
-                <p>Clique em um dia para selecionar.</p>
+                <p>Clique em um dia para selecionar e ver os detalhes.</p>
             </div>
-
         </section>
-
     </main>
 
     <script src="Script.js"></script>
-
 </body>
 </html>
