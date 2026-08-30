@@ -1,5 +1,6 @@
 const mesAno = document.getElementById("mes-ano");
 const diasGrid = document.querySelector(".dias-grid");
+
 const botaoAnterior = document.getElementById("mes-anterior");
 const botaoProximo = document.getElementById("proximo-mes");
 
@@ -29,8 +30,16 @@ const nomesMeses = [
     "Dezembro"
 ];
 
-const dadosCalendario = {
+/*
+|--------------------------------------------------------------------------
+| FERIADOS E DATAS BLOQUEADAS
+|--------------------------------------------------------------------------
+*/
 
+const dadosCalendario = {
+    /* =========================
+       2026
+    ========================= */
 
     "2026-01-01": {
         feriado: "Confraternização Universal",
@@ -107,6 +116,9 @@ const dadosCalendario = {
         disponivel: false
     },
 
+    /* =========================
+       2027
+    ========================= */
 
     "2027-01-01": {
         feriado: "Confraternização Universal",
@@ -183,6 +195,9 @@ const dadosCalendario = {
         disponivel: false
     },
 
+    /* =========================
+       2028
+    ========================= */
 
     "2028-01-01": {
         feriado: "Confraternização Universal",
@@ -259,6 +274,10 @@ const dadosCalendario = {
         disponivel: false
     },
 
+    /* =========================
+       2029
+    ========================= */
+
     "2029-01-01": {
         feriado: "Confraternização Universal",
         disponivel: false
@@ -334,6 +353,9 @@ const dadosCalendario = {
         disponivel: false
     },
 
+    /* =========================
+       2030
+    ========================= */
 
     "2030-01-01": {
         feriado: "Confraternização Universal",
@@ -412,33 +434,145 @@ const dadosCalendario = {
 };
 
 
+function formatarData(ano, mes, dia) {
+    return `${ano}-${String(mes + 1).padStart(2, "0")}-${String(dia).padStart(2, "0")}`;
+}
+
+
+function ehFimDeSemana(data) {
+    const diaSemana = data.getDay();
+
+    return diaSemana === 0 || diaSemana === 6;
+}
+
+
+function ehHoje(dia) {
+    return (
+        dia === hoje.getDate() &&
+        mesAtual === hoje.getMonth() &&
+        anoAtual === hoje.getFullYear()
+    );
+}
+
+
+function obterStatus(data, infoDia) {
+
+    if (infoDia?.disponivel === false) {
+        return "Indisponível";
+    }
+
+    if (ehFimDeSemana(data)) {
+        return "Indisponível (Fim de semana)";
+    }
+
+    return "Disponível";
+}
+
+
+function mostrarInformacoes(dia, data, chaveData, infoDia) {
+
+    painelInfo.style.display = "block";
+
+    infoData.textContent =
+        `${dia} de ${nomesMeses[mesAtual]} de ${anoAtual}`;
+
+    const status = obterStatus(data, infoDia);
+
+    infoStatus.innerHTML =
+        `<strong>Disponibilidade:</strong> ${status}`;
+
+    if (infoDia?.feriado) {
+
+        infoFeriado.innerHTML =
+            `<strong>Feriado:</strong> ${infoDia.feriado}`;
+
+    } else {
+
+        infoFeriado.innerHTML =
+            `<strong>Feriado:</strong> Nenhum feriado registrado`;
+
+    }
+}
+
+
+function selecionarDia(dia, elementoDia, data, infoDia) {
+
+    diaSelecionado = {
+        dia,
+        mes: mesAtual,
+        ano: anoAtual
+    };
+
+    document
+        .querySelectorAll(".dia.selecionado")
+        .forEach(elemento => {
+            elemento.classList.remove("selecionado");
+        });
+
+    elementoDia.classList.add("selecionado");
+
+    const chaveData = formatarData(
+        anoAtual,
+        mesAtual,
+        dia
+    );
+
+    mostrarInformacoes(
+        dia,
+        data,
+        chaveData,
+        infoDia
+    );
+}
+
+
+
 function gerarCalendario() {
 
     diasGrid.innerHTML = "";
 
-    mesAno.textContent = `${nomesMeses[mesAtual]} de ${anoAtual}`;
+    mesAno.textContent =
+        `${nomesMeses[mesAtual]} de ${anoAtual}`;
 
-    const primeiroDia = new Date(anoAtual, mesAtual, 1);
-    const ultimoDia = new Date(anoAtual, mesAtual + 1, 0);
+    const primeiroDia =
+        new Date(anoAtual, mesAtual, 1);
 
-    const diaSemanaInicio = primeiroDia.getDay();
-    const quantidadeDias = ultimoDia.getDate();
+    const ultimoDia =
+        new Date(anoAtual, mesAtual + 1, 0);
+
+    const diaSemanaInicio =
+        primeiroDia.getDay();
+
+    const quantidadeDias =
+        ultimoDia.getDate();
 
 
     
+
     for (let i = 0; i < diaSemanaInicio; i++) {
 
-        const vazio = document.createElement("div");
+        const vazio =
+            document.createElement("div");
 
-        vazio.classList.add("dia", "vazio");
+        vazio.classList.add(
+            "dia",
+            "vazio"
+        );
+
+        vazio.setAttribute(
+            "aria-hidden",
+            "true"
+        );
 
         diasGrid.appendChild(vazio);
     }
 
 
+
     for (let dia = 1; dia <= quantidadeDias; dia++) {
 
-        const elementoDia = document.createElement("button");
+        const elementoDia =
+            document.createElement("button");
 
         elementoDia.type = "button";
 
@@ -446,68 +580,85 @@ function gerarCalendario() {
 
         elementoDia.textContent = dia;
 
+        const dataAtualLoop =
+            new Date(
+                anoAtual,
+                mesAtual,
+                dia
+            );
 
-        const dataAtualLoop = new Date(
-            anoAtual,
-            mesAtual,
-            dia
-        );
-
-        const diaSemana = dataAtualLoop.getDay();
-
-
-        if (diaSemana === 0 || diaSemana === 6) {
-
-            elementoDia.classList.add("domingo");
-
-        }
-
-        const mesFormatado = String(
-            mesAtual + 1
-        ).padStart(2, "0");
-
-        const diaFormatado = String(
-            dia
-        ).padStart(2, "0");
+        const diaSemana =
+            dataAtualLoop.getDay();
 
         const chaveData =
-            `${anoAtual}-${mesFormatado}-${diaFormatado}`;
+            formatarData(
+                anoAtual,
+                mesAtual,
+                dia
+            );
+
+        const infoDia =
+            dadosCalendario[chaveData];
 
 
-        const infoDia = dadosCalendario[chaveData];
+       
+        elementoDia.setAttribute(
+            "aria-label",
+            `${dia} de ${nomesMeses[mesAtual]} de ${anoAtual}`
+        );
 
 
-        if (infoDia) {
+        if (ehFimDeSemana(dataAtualLoop)) {
 
-            if (infoDia.feriado) {
+            elementoDia.classList.add(
+                "domingo"
+            );
 
-                elementoDia.classList.add("feriado");
+        }
 
-            }
 
-            if (infoDia.disponivel === true) {
+        if (infoDia?.feriado) {
 
-                elementoDia.classList.add("disponivel");
+            elementoDia.classList.add(
+                "feriado"
+            );
 
-            } else if (infoDia.disponivel === false) {
+            elementoDia.setAttribute(
+                "title",
+                infoDia.feriado
+            );
+        }
 
-                elementoDia.classList.add("indisponivel");
 
-            }
+
+        if (infoDia?.disponivel === true) {
+
+            elementoDia.classList.add(
+                "disponivel"
+            );
 
         }
 
-        const ehHoje =
-            dia === hoje.getDate() &&
-            mesAtual === hoje.getMonth() &&
-            anoAtual === hoje.getFullYear();
+        if (infoDia?.disponivel === false) {
 
-
-        if (ehHoje) {
-
-            elementoDia.classList.add("hoje");
+            elementoDia.classList.add(
+                "indisponivel"
+            );
 
         }
+
+        if (ehHoje(dia)) {
+
+            elementoDia.classList.add(
+                "hoje"
+            );
+
+            elementoDia.setAttribute(
+                "aria-current",
+                "date"
+            );
+        }
+
 
         if (
             diaSelecionado &&
@@ -516,112 +667,89 @@ function gerarCalendario() {
             diaSelecionado.ano === anoAtual
         ) {
 
-            elementoDia.classList.add("selecionado");
+            elementoDia.classList.add(
+                "selecionado"
+            );
 
         }
 
-        elementoDia.addEventListener("click", () => {
+        elementoDia.addEventListener(
+            "click",
+            () => {
 
-            diaSelecionado = {
-
-                dia,
-                mes: mesAtual,
-                ano: anoAtual
-
-            };
-
-            document
-                .querySelectorAll(".dia.selecionado")
-                .forEach(item => {
-
-                    item.classList.remove("selecionado");
-
-                });
-
-
-            elementoDia.classList.add("selecionado");
-
-
-            painelInfo.style.display = "block";
-
-            infoData.textContent =
-                `${dia} de ${nomesMeses[mesAtual]} de ${anoAtual}`;
-
-            if (infoDia) {
-
-                infoStatus.innerHTML =
-                    `<strong>Disponibilidade:</strong> ${
-                        infoDia.disponivel
-                            ? "Disponível"
-                            : "Indisponível"
-                    }`;
-
-                infoFeriado.innerHTML =
-                    `<strong>Feriado:</strong> ${
-                        infoDia.feriado
-                    }`;
+                selecionarDia(
+                    dia,
+                    elementoDia,
+                    dataAtualLoop,
+                    infoDia
+                );
 
             }
-
-            else if (diaSemana === 0 || diaSemana === 6) {
-
-                infoStatus.innerHTML =
-                    `<strong>Disponibilidade:</strong> Indisponível (Fim de semana)`;
-
-                infoFeriado.innerHTML =
-                    `<strong>Feriado:</strong> Nenhum feriado registrado`;
-
-            }
-
-            else {
-
-                infoStatus.innerHTML =
-                    `<strong>Disponibilidade:</strong> Disponível (Padrão)`;
-
-                infoFeriado.innerHTML =
-                    `<strong>Feriado:</strong> Nenhum feriado registrado`;
-
-            }
-
-        });
+        );
 
 
-        diasGrid.appendChild(elementoDia);
-
+        diasGrid.appendChild(
+            elementoDia
+        );
     }
-
 }
 
-botaoAnterior.addEventListener("click", () => {
 
-    mesAtual--;
 
-    if (mesAtual < 0) {
+botaoAnterior.addEventListener(
+    "click",
+    () => {
 
-        mesAtual = 11;
+        mesAtual--;
 
-        anoAtual--;
+        if (mesAtual < 0) {
+
+            mesAtual = 11;
+            anoAtual--;
+
+        }
+
+        gerarCalendario();
+    }
+);
+
+
+botaoProximo.addEventListener(
+    "click",
+    () => {
+
+        mesAtual++;
+
+        if (mesAtual > 11) {
+
+            mesAtual = 0;
+            anoAtual++;
+
+        }
+
+        gerarCalendario();
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    evento => {
+
+        if (evento.key === "ArrowLeft") {
+
+            botaoAnterior.click();
+
+        }
+
+        if (evento.key === "ArrowRight") {
+
+            botaoProximo.click();
+
+        }
 
     }
+);
 
-    gerarCalendario();
-
-});
-
-botaoProximo.addEventListener("click", () => {
-
-    mesAtual++;
-
-    if (mesAtual > 11) {
-
-        mesAtual = 0;
-
-        anoAtual++;
-
-    }
-
-    gerarCalendario();
-
-});
 
 gerarCalendario();

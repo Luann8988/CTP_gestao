@@ -1,83 +1,214 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Minha Vez - Gerencie seus cursos e acompanhe sua disponibilidade no calendário."
+    >
+
+    <title>Minha Vez | Calendário</title>
+
     <link rel="stylesheet" href="Styles.css">
-    <title>Minha Vez</title>
 </head>
+
 <body>
 
     <header class="header">
-        <a href="Index.html" class="logo" aria-label="Minha Vez">
+
+        <a
+            href="Index.html"
+            class="logo"
+            aria-label="Minha Vez - Página inicial"
+        >
             <span>minha</span>
-            <span class="logo-simbolo"></span>
+            <span
+                class="logo-simbolo"
+                aria-hidden="true"
+            ></span>
             <span>vez</span>
         </a>
 
-        <nav class="menu">
-            <a href="Index.html" class="ativo">Início</a>
-            <a href="cursos.html">Cursos</a>
-            <a href="Sobre.html">Sobre</a>
-            <a href="#">Contato</a>
+
+        <!-- Menu principal -->
+        <nav
+            class="menu"
+            aria-label="Menu principal"
+        >
+
+            <a href="Sobre.html">
+                Sobre Nós
+            </a>
+
+            <a href="Contato.html">
+                Contato
+            </a>
+
+            <a
+                href="Cursos.html">
+                Cursos
+            </a>
+
         </nav>
+
     </header>
 
+
     <main class="layout">
-        <aside class="sidebar">
+
+
+     
+        <aside
+            class="sidebar"
+            aria-label="Meus cursos"
+        >
+
             <div class="legenda">
-                <h2>Meus cursos</h2>
+
+                <h2>
+                    Meus cursos
+                </h2>
+
             </div>
 
             <hr>
 
-            <div class="curso-mini azul">
-                <h3>Curso 1</h3>
-                <a href="#">Ver curso</a>
-                <div>
-                    <span>Início</span>
-                    <span>Hoje</span>
-                </div>
+            <div
+                class="cursos"
+                aria-label="Lista de cursos"
+            >
+
+
+                <!-- Curso 1 -->
+                <article class="curso-mini azul">
+
+                    <h3>
+                        Curso de Solda
+                    </h3>
+
+                    <a href="Cursos.html">
+                        Ver curso
+                    </a>
+
+                    <div>
+                        <span>
+                            13:00 - 17:00
+                        </span>
+
+                        <span>
+                            Inscrições até amanhã
+                        </span>
+                    </div>
+
+                </article>
+
+
+                <!-- Curso 2 -->
+                <article class="curso-mini rosa">
+
+                    <h3>
+                        Bombons e Trufas
+                    </h3>
+
+                    <a href="Cursos.html">
+                        Ver curso
+                    </a>
+
+                    <div>
+                        <span>
+                            13:00 - 17:00
+                        </span>
+
+                        <span>
+                            Inscrições até dia 04/09
+                        </span>
+                    </div>
+
+                </article>
+
+
+                <!-- Curso 3 -->
+                <article class="curso-mini verde">
+
+                    <h3>
+                        Informática
+                    </h3>
+
+                    <a href="Cursos.html">
+                        Ver curso
+                    </a>
+
+                    <div>
+                        <span>
+                            13:00 - 17:00
+                        </span>
+
+                        <span>
+                            Inscrições até amanhã
+                        </span>
+                    </div>
+
+                </article>
+
             </div>
 
-            <div class="curso-mini rosa">
-                <h3>Curso 2</h3>
-                <a href="#">Ver curso</a>
-                <div>
-                    <span>Início</span>
-                    <span>Hoje</span>
-                </div>
-            </div>
-
-            <div class="curso-mini verde">
-                <h3>Curso 3</h3>
-                <a href="#">Ver curso</a>
-                <div>
-                    <span>Início</span>
-                    <span>Hoje</span>
-                </div>
-            </div>
-
-            <button class="botao-add" type="button" aria-label="Adicionar curso">
-                +
-            </button>
         </aside>
 
-        <section class="conteudo">
+
+      
+        <section
+            class="conteudo"
+            aria-label="Calendário de disponibilidade"
+        >
+
+
             <div class="calendario">
+
+
                 <div class="calendario-topo">
-                    <button id="mes-anterior" type="button" aria-label="Mês anterior">
+
+                    <button
+                        id="mes-anterior"
+                        type="button"
+                        aria-label="Ir para o mês anterior"
+                        title="Mês anterior"
+                    >
                         ‹
                     </button>
 
-                    <h1 id="mes-ano"></h1>
 
-                    <button id="proximo-mes" type="button" aria-label="Próximo mês">
+                    <h1
+                        id="mes-ano"
+                        aria-live="polite"
+                    >
+                        Janeiro de 2026
+                    </h1>
+
+
+                    <button
+                        id="proximo-mes"
+                        type="button"
+                        aria-label="Ir para o próximo mês"
+                        title="Próximo mês"
+                    >
                         ›
                     </button>
+
                 </div>
 
-                <div class="dias">
+
+                <div
+                    class="dias"
+                    aria-hidden="true"
+                >
+
                     <span>Dom</span>
                     <span>Seg</span>
                     <span>Ter</span>
@@ -85,24 +216,72 @@
                     <span>Qui</span>
                     <span>Sex</span>
                     <span>Sáb</span>
+
                 </div>
 
-                <div class="dias-grid"></div>
+
+                <!-- Dias do calendário -->
+                <div
+                    class="dias-grid"
+                    role="grid"
+                    aria-label="Dias do mês"
+                ></div>
+
             </div>
 
-            <div id="painel-info" class="painel-info" style="display: none;">
-                <h3 id="info-data">Selecione uma data</h3>
-                <p id="info-status"><strong>Disponibilidade:</strong> -</p>
-                <p id="info-feriado"><strong>Feriado:</strong> -</p>
-            </div>
 
-            <div class="observacao">
-                <strong>Observação:</strong>
-                <p>Clique em um dia para selecionar e ver os detalhes.</p>
-            </div>
+            <section
+                id="painel-info"
+                class="painel-info"
+                aria-live="polite"
+                style="display: none;"
+            >
+
+                <h3 id="info-data">
+                    Selecione uma data
+                </h3>
+
+                <p id="info-status">
+                    <strong>
+                        Disponibilidade:
+                    </strong>
+
+                    -
+                </p>
+
+                <p id="info-feriado">
+                    <strong>
+                        Feriado:
+                    </strong>
+
+                    -
+                </p>
+
+            </section>
+
+
+          
+            <aside class="observacao">
+
+                <strong>
+                    Observação:
+                </strong>
+
+                <p>
+                    Clique em um dia para selecionar
+                    e ver os detalhes.
+                </p>
+
+            </aside>
+
+
         </section>
+
     </main>
 
+
     <script src="Script.js"></script>
+
 </body>
+
 </html>
